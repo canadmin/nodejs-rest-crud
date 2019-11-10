@@ -1,4 +1,4 @@
-import { addNewUser } from "../controller/userController";
+import { addNewUser,getUsers, getUserById, updateUser, deleteUser } from "../controller/userController";
 
 const routes = (app) => {
     app.route('/user')
@@ -7,19 +7,17 @@ const routes = (app) => {
         console.log(`request from : ${req.originalUrl}`)
         console.log(`request from : ${req.method}`)
         next();
-    },(req,res,next) => {
-        res.send('get request succesfull!!!');
-    })
+    },getUsers)
     
     .post(addNewUser);
+    
 
-
+    //get specific user
+  
     app.route('/user/:userId')
-     .put((req,res)=>
-        res.send('put request succesfull!!!'))
-     
-     .delete((req,res)=>
-        res.send('delete request succesfull!!!'))
+    .get(getUserById)
+    .put(updateUser)
+    .delete(deleteUser)
 }
 
 export default routes;
